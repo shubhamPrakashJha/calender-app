@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 /* Components Imports */
 import Home from './pages/Home';
 
-const Routes = () => {
+const Router = () => {
   return (
     <Switch>
       <Route exact path="/">
@@ -17,4 +17,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default Router;
