@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core'
-
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,17 +13,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const Home = () => {
+const Calender = () => {
   const classes = useStyles();
 
   return (
     <div>
       <div className={classes.root}>
-        <h1>App</h1>
+        <h1>Calender</h1>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Calender;

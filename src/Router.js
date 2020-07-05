@@ -6,13 +6,20 @@ import { Switch, Route } from 'react-router-dom';
 
 /* Components Imports */
 import Home from './pages/Home';
+import AppLayout from './layouts/AppLayout';
+import Calender from './pages/Calender';
 
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
+      <AppLayout>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/calender">
+          <Calender />
+        </Route>
+      </AppLayout>
     </Switch>
   );
 };

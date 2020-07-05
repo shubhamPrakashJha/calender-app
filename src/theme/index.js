@@ -38,22 +38,16 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiLinearProgress: {
-      root: {
-        borderRadius: 3,
-        overflow: 'hidden',
+    MuiDrawer: {
+      paperAnchorDockedLeft: {
+        borderRight: 0,
       },
     },
-    MuiListItemIcon: {
-      root: {
-        minWidth: 32,
-      },
-    },
-    MuiChip: {
-      root: {
-        backgroundColor: 'rgba(0,0,0,0.075)',
-      },
-    },
+    // MuiPaper: {
+    //   root: {
+    //     backgroundColor: '#813588',
+    //   },
+    // },
   },
   palette: {
     type: 'dark',
