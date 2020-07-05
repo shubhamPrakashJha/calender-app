@@ -58,21 +58,26 @@ const useStyles = makeStyles((theme) => ({
     width: '10%',
     [theme.breakpoints.down('sm')]: {
       '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-      width: '50%',
-    },
-    transition: theme.transitions.create(['width', 'backgroundColor'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+        width: '50%',
+      },
+      transition: theme.transitions.create(['width', 'backgroundColor'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       backgroundColor: fade(theme.palette.common.white, 0.15),
+      width: '10%',
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
+        width: '15%',
       },
-      width: 'auto',
+      transition: theme.transitions.create(['width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
   },
   searchIcon: {
