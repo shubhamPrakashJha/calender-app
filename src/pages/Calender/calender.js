@@ -32,12 +32,13 @@ function Calendar(props) {
     description: '',
   });
 
+  const { fetchEvents } = props;
   useEffect(() => {
-    const  fetchEvents = async () => {
-      await props.fetchEvents();
-    }
-    fetchEvents();
-  }, [])
+    const fetchEventss = async () => {
+      await fetchEvents();
+    };
+    fetchEventss();
+  }, [fetchEvents]);
 
   const theme = useTheme();
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));

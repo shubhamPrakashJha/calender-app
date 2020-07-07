@@ -42,13 +42,13 @@ export default function AppLayout({ children, ...props }) {
   };
 
   useEffect(() => {
-    if(props.location.pathname === '/'){
+    if (props.location.pathname === '/') {
       setCurrentTab('Home');
     }
-    if (props.location.pathname === '/calender'){
+    if (props.location.pathname === '/calender') {
       setCurrentTab('Calender');
     }
-  }, [])
+  }, [props.location.pathname]);
 
 
   return (
