@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Navbar } from './Navbar';
@@ -28,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
   }},
 }));
 
-export default function AppLayout({ children }) {
+export default function AppLayout({ children, ...props }) {
   const classes = useStyles();
-  const [currentTab, setCurrentTab] = React.useState('Home');
+  const [currentTab, setCurrentTab] = React.useState();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -40,6 +40,16 @@ export default function AppLayout({ children }) {
   const handleCurrentTab = (tabName) => {
     setCurrentTab(tabName);
   };
+
+  useEffect(() => {
+    if(props.location.pathname === '/'){
+      setCurrentTab('Home');
+    }
+    if (props.location.pathname === '/calender'){
+      setCurrentTab('Calender');
+    }
+  }, [])
+
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -70,7 +71,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       marginBottom: '8px',
-      marginLeft: '0px'
+      marginLeft: '0px',
+    },
+  },
+  lastButton: {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '8px',
     },
   },
 }));
@@ -129,19 +135,19 @@ function CalenderDialogue({
                 <Button
                   onClick={handleDeleteEvent}
                   variant="contained"
-                  color="primary"
+                  color="error"
                   className={classes.buttons}
                 >
                   Delete
                 </Button>
               )}
             </Box>
-            <Box className={classes.buttons} style={{marginLeft: "0px"}}>
+            <Box className={classes.buttons} style={{ marginLeft: '0px' }}>
               <Button
                 onClick={handleClose}
                 variant="outlined"
                 color="primary"
-                className={classes.buttons}
+                className={clsx(classes.buttons)}
               >
                 Cancel
               </Button>
@@ -149,9 +155,9 @@ function CalenderDialogue({
                 onClick={handleUpdateEvent}
                 color="primary"
                 variant="contained"
-                className={classes.buttons}
+                className={clsx(classes.buttons, classes.lastButton)}
               >
-                Add Event
+                {`${eventMode} Event`}
               </Button>
             </Box>
           </DialogActions>

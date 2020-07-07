@@ -1,16 +1,16 @@
 import React from 'react';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import EventIcon from '@material-ui/icons/Event';
+import HomeIcon from '@material-ui/icons/Home';
 
 const navConfig = [
   {
     title: 'Home',
-    icon: <InboxIcon />,
+    icon: <HomeIcon />,
     href: '/',
   },
   {
     title: 'Calender',
-    icon: <MailIcon />,
+    icon: <EventIcon />,
     href: '/calender',
   },
 ];

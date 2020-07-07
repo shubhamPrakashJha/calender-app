@@ -57,7 +57,7 @@ table.fc-scrollgrid.fc-scrollgrid-liquid thead {
 }
 
 .fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
-  height: 100%;
+    height: auto;
 }
 
 .fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
@@ -71,21 +71,32 @@ table.fc-scrollgrid.fc-scrollgrid-liquid thead {
 .fc-h-event {
     display: block;
     border: 1px solid #8a593e85;
-    border: 1px solid #8a593e;
-    background-color: #8a593e85;
-    background-color: #8a593e85;
+    border: 1px solid #484b52;
+    background-color: #484b52;
+    background-color: #484b52;
     height: 30px;
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 2px solid rgb(224, 130, 88);
+    border-left: 2px solid rgb(230, 229, 232);
 }
-
 .fc .fc-daygrid-event-harness {
     position: relative;
     display: flex;
     justify-content: center;
+}
+.fc-scroller.fc-scroller-liquid-absolute {
+    overflow: hidden;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: rgb(28, 32, 37);
+    /* background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15)); */
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  overflow: hidden;
 }
 
 @media (max-width: 425px) {
@@ -100,10 +111,17 @@ table.fc-scrollgrid.fc-scrollgrid-liquid thead {
   .fc .fc-view-harness-active > .fc-view {
     padding: 0rem;
   }
+
 }
 
 @media (max-width: 960px) {
   .fc .fc-toolbar.fc-header-toolbar {
     margin: 0.5rem;
   }
+    .fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
+    height: 100%;
+}
+.fc-h-event {
+    width: 100%;
+}
 }
