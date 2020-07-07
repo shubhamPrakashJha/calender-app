@@ -55,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    width: '10%',
+    width: '2rem',
     [theme.breakpoints.down('sm')]: {
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
-        width: '50%',
+        width: '10rem',
       },
       transition: theme.transitions.create(['width', 'backgroundColor'], {
         easing: theme.transitions.easing.sharp,
@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       backgroundColor: fade(theme.palette.common.white, 0.15),
-      width: '10%',
+      width: '10rem',
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
-        width: '15%',
+        width: '15rem',
       },
       transition: theme.transitions.create(['width'], {
         easing: theme.transitions.easing.sharp,

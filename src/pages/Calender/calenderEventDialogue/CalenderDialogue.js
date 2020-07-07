@@ -1,5 +1,6 @@
-import React, { makeStyles } from 'react';
-import { withStyles  } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -21,7 +22,6 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -57,12 +57,23 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-// const useStyles = makeStyles((theme) => ({
-//   buttonContainer: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '16px',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
+  },
+  buttons: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      marginBottom: '8px',
+      marginLeft: '0px'
+    },
+  },
+}));
 
 function CalenderDialogue({
   open,
@@ -76,6 +87,7 @@ function CalenderDialogue({
   handleDeleteEvent,
   eventMode,
 }) {
+   const classes = useStyles();
   return (
     <div>
       <Dialog
@@ -111,32 +123,33 @@ function CalenderDialogue({
               />
             </Box>
           </DialogContent>
-          <DialogActions
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '16px',
-            }}
-          >
-            <Box>
-              {eventMode === "Edit" &&
+          <DialogActions className={classes.buttonContainer}>
+            <Box className={classes.buttons}>
+              {eventMode === 'Edit' && (
                 <Button
                   onClick={handleDeleteEvent}
                   variant="contained"
                   color="primary"
+                  className={classes.buttons}
                 >
                   Delete
                 </Button>
-              }
+              )}
             </Box>
-            <Box>
-              <Button onClick={handleClose} variant="outlined" color="primary" style={{marginRight:"8px"}}>
+            <Box className={classes.buttons} style={{marginLeft: "0px"}}>
+              <Button
+                onClick={handleClose}
+                variant="outlined"
+                color="primary"
+                className={classes.buttons}
+              >
                 Cancel
               </Button>
               <Button
                 onClick={handleUpdateEvent}
                 color="primary"
                 variant="contained"
+                className={classes.buttons}
               >
                 Add Event
               </Button>

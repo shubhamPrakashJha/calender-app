@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useMediaQuery} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    [theme.breakpoints.up('sm')]: {
+      
+    }
   },
   drawerOpen: {
     width: drawerWidth,
@@ -45,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(8) + 1,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
     },
   },
   toolbar: {
@@ -87,11 +94,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar({ open, handleDrawerToggle, changeTab, tab }) {
   const classes = useStyles();
   const theme = useTheme();
+  const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <div className={classes.root}>
       <Drawer
-        variant="permanent"
+        variant={mobileDevice ? 'temporary' : 'permanent'}
+        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+        open={open}
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
@@ -101,6 +111,9 @@ export default function Sidebar({ open, handleDrawerToggle, changeTab, tab }) {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
           }),
+        }}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
         }}
       >
         <div className={classes.toolbar}>
@@ -122,10 +135,7 @@ export default function Sidebar({ open, handleDrawerToggle, changeTab, tab }) {
                 [classes.active]: item.title === tab,
               })}
             >
-              <Link
-                to={item.href}
-                className={clsx(classes.button)}
-              >
+              <Link to={item.href} className={clsx(classes.button)}>
                 <ListItemIcon className={classes.icon}>
                   {item.icon}
                 </ListItemIcon>

@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     background: theme.palette.background.dark,
     minHeight: '100vh',
-  },
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0),
+  }},
 }));
 
 export default function AppLayout({ children }) {

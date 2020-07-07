@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
+import {
+  Box,
+  Container,
+  Paper,
+  useTheme,
+  useMediaQuery,
+  makeStyles,
+} from '@material-ui/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CalenderDialogue from './calenderEventDialogue';
 import { v4 as uuidv4 } from 'uuid';
+import './calender.css';
 
 function Calendar() {
   const [dialogueOpen, setDialogueOpen] = useState(false);
@@ -23,6 +32,9 @@ function Calendar() {
     { id: '1', title: 'event 1', date: '2020-07-06', description: '' },
     { id: '2', title: 'event 2', date: '2020-07-07', description: '' },
   ]);
+  const theme = useTheme();
+    const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
+
 
   const handleTitleChange = (event) => {
     setEventTitle(event.target.value);
@@ -95,9 +107,11 @@ function Calendar() {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
-          left: 'prev,next today',
+          left: mobileDevice ? 'prev,next' : 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          right: mobileDevice
+            ? 'dayGridMonth,timeGridDay'
+            : 'dayGridMonth,timeGridWeek,timeGridDay',
         }}
         initialView="dayGridMonth"
         editable={true}
