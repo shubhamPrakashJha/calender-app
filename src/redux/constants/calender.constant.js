@@ -1,0 +1,7 @@
+export const FETCH_DATA_PENDING = 'FETCH_DATA_PENDING';
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
+export const ADD_EVENT = 'ADD_EVENT';
+export const DELETE_EVENT = 'DELETE_EVENT';
+export const EDIT_EVENT = 'EDIT_EVENT';
+

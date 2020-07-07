@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import {
   useTheme,
   useMediaQuery,
@@ -11,7 +11,14 @@ import CalenderDialogue from './calenderEventDialogue';
 import { v4 as uuidv4 } from 'uuid';
 import './calender.css';
 
-function Calendar() {
+/* Redux */
+import { connect } from "react-redux";
+
+/* Redux Actions */
+import { fetchDataAction, addEvent, deleteEvent, editEvent } from "../../redux/actions/calender.action";
+
+
+function Calendar(props) {
   const [dialogueOpen, setDialogueOpen] = useState(false);
   const [eventMode, setEventMode] = useState(null);
   const [eventId, setEventId] = useState();
@@ -24,10 +31,14 @@ function Calendar() {
     title: '',
     description: '',
   });
-  const [events, setEvents] = useState([
-    { id: '1', title: 'event 1', date: '2020-07-06', description: '' },
-    { id: '2', title: 'event 2', date: '2020-07-07', description: '' },
-  ]);
+
+  useEffect(() => {
+    const  fetchEvents = async () => {
+      await props.fetchEvents();
+    }
+    fetchEvents();
+  }, [])
+
   const theme = useTheme();
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -54,7 +65,7 @@ function Calendar() {
     setDialogueOpen(true);
   };
   const handleEventClick = (selectInfo) => {
-    const clickedEvent = events.find(
+    const clickedEvent = props.events.find(
       (event) => event.id === selectInfo.event.id
     );
     console.log(clickedEvent);
@@ -67,20 +78,23 @@ function Calendar() {
     setDialogueOpen(true);
   };
   const handleUpdateEvent = () => {
-    const newEvent = {
-      id: uuidv4(),
-      title: eventTitle,
-      date: eventDate,
-      description: eventDescription,
-    };
-
     if(eventMode === "Add"){
-      setEvents([...events, newEvent]);
-    }else{
-      const filteredEvent = events.filter(
-        (event) => event.id !== eventId
-      );
-      setEvents([...filteredEvent, newEvent]);
+      const newEvent = {
+        id: uuidv4(),
+        title: eventTitle,
+        date: eventDate,
+        description: eventDescription,
+      };
+      props.addEvent(newEvent);
+    }
+    if (eventMode === 'Edit') {
+      const currentEvent = {
+        id: eventId,
+        title: eventTitle,
+        date: eventDate,
+        description: eventDescription,
+      };
+      props.editEvent(currentEvent);
     }
     setDialogueOpen(false);
     setEventId('');
@@ -89,8 +103,7 @@ function Calendar() {
     setEventDate('');
   };
   const handleDeleteEvent = () => {
-    const filteredEvent = events.filter((event) => event.id !== eventId);
-    setEvents(filteredEvent);
+    props.deleteEvent(eventId);
     setDialogueOpen(false);
     setEventId('');
     setEventTitle('');
@@ -118,7 +131,7 @@ function Calendar() {
         weekends={true}
         dateClick={handleDateClick}
         eventClick={handleEventClick}
-        events={events}
+        events={props.events}
       />
       <CalenderDialogue
         open={dialogueOpen}
@@ -138,4 +151,17 @@ function Calendar() {
   );
 }
 
-export default Calendar;
+/* Map State And Action-Dispatcher to components Props*/
+const mapStateToProps = state => ({
+	events: state.fetchDataReducer.events
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchEvents: () => dispatch(fetchDataAction()),
+  addEvent: (newEvent) => dispatch(addEvent(newEvent)),
+  deleteEvent: (eventObj) => dispatch(deleteEvent(eventObj)),
+  editEvent: (eventObj) => dispatch(editEvent(eventObj)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
