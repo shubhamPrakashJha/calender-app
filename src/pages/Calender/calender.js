@@ -1,11 +1,7 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useState} from 'react';
 import {
-  Box,
-  Container,
-  Paper,
   useTheme,
   useMediaQuery,
-  makeStyles,
 } from '@material-ui/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
